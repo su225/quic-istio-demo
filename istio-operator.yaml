@@ -5,6 +5,12 @@ metadata:
 spec:
   hub: localhost:5000
   tag: master
+  meshConfig:
+    accessLogFile: "/dev/stdout"
+    defaultConfig:
+      proxyMetadata:
+        ISTIO_META_PROXY_XDS_VIA_AGENT: "true"
+        ISTIO_META_DNS_CAPTURE: "true"
   components:
     ingressGateways:
     - name: istio-ingressgateway
@@ -32,3 +38,8 @@ spec:
       # on the gateway
       env:
         PILOT_ENABLE_QUIC_LISTENERS: true
+    global:
+      proxy:
+        logLevel: debug
+      logging:
+        level: debug
